@@ -1,0 +1,27 @@
+{
+  "name": "@forzoom/mta",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/mta.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config ./build/webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Forzoom/mta.git"
+  },
+  "author": "Forzoom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Forzoom/mta/issues"
+  },
+  "homepage": "https://github.com/Forzoom/mta#readme",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack": "^3.2.0"
+  }
+}
