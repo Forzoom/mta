@@ -47,9 +47,19 @@ function clickStatTrue(id, params, test) {
     return false;
 }
 
+// !== 
+function clickStatNotEqual(id, params, test, value) {
+    if (test !== value) {
+        clickStat(id, params);
+        return true;
+    }
+    return false;
+}
+
 export {
     clickStat,
     clickStatEqual,
+    clickStatNotEqual,
     clickStatNotNull,
     clickStatTrue,
 };
