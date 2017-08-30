@@ -1,6 +1,6 @@
 {
   "name": "@forzoom/mta",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/mta.min.js",
   "scripts": {

@@ -7,6 +7,7 @@ function isUndef(v) {
 const supportMtaH5 = 'MtaH5' in window;
 const isProduction = process.env.NODE_ENV === 'production';
 
+// todo: 这里的提示会被删除
 if (process.env.NODE_ENV !== 'production') {
     console.log('[MtaH5 info] MtaH5 is disabled');
 }
@@ -29,9 +30,9 @@ function clickStatEqual(id, params, test, value) {
     return false;
 }
 
-// not null
-function clickStatNotNull(id, params, test) {
-    if (!isUndef(test)) {
+// !== 
+function clickStatNotEqual(id, params, test, value) {
+    if (test !== value) {
         clickStat(id, params);
         return true;
     }
@@ -40,20 +41,12 @@ function clickStatNotNull(id, params, test) {
 
 // 只有确实是true的情况才可以
 function clickStatTrue(id, params, test) {
-    if (test === true) {
-        clickStat(id, params);
-        return true;
-    }
-    return false;
+    return clickStatEqual(id, params, test, true);
 }
 
-// !== 
-function clickStatNotEqual(id, params, test, value) {
-    if (test !== value) {
-        clickStat(id, params);
-        return true;
-    }
-    return false;
+// not null
+function clickStatNotNull(id, params, test) {
+    return clickStatTrue(id, params, !isUndef(test));
 }
 
 export {
