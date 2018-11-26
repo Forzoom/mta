@@ -4,56 +4,66 @@ function isUndef(v) {
     return v === null || v === undefined;
 }
 
-const supportMtaH5 = 'MtaH5' in window;
-const isProduction = process.env.NODE_ENV === 'production';
-
-// todo: 这里的提示会被删除
-if (process.env.NODE_ENV !== 'production') {
-    console.log('[MtaH5 info] MtaH5 is disabled');
-}
-function clickStat(id, params) {
-    if (isProduction) {
-        if (supportMtaH5) {
-            MtaH5.clickStat(id, params);
-        } else {
-            console.log('[MtaH5 warning] MtaH5 is lost');
-        }
+function rawClickStat(id, params, name) {
+    if (name in window) {
+        window[name].clickStat(id, params);
+    } else {
+        console.log(`[${name} warning] MtaH5 is lost`);
     }
 }
 
 // 指定Key的值是Value的时候发送
-function clickStatEqual(id, params, test, value) {
+function rawClickStatEqual(id, params, test, value, name) {
     if (test === value) {
-        clickStat(id, params);
+        rawClickStat(id, params, name);
         return true;
     }
     return false;
 }
 
 // !== 
-function clickStatNotEqual(id, params, test, value) {
+function rawClickStatNotEqual(id, params, test, value, name) {
     if (test !== value) {
-        clickStat(id, params);
+        rawClickStat(id, params, name);
         return true;
     }
     return false;
 }
 
 // 只有确实是true的情况才可以
-function clickStatTrue(id, params, test) {
-    return clickStatEqual(id, params, test, true);
+function rawClickStatTrue(id, params, test, name) {
+    return rawClickStatEqual(id, params, test, true, name);
 }
 
 // not null
-function clickStatNotNull(id, params, test) {
-    return clickStatTrue(id, params, !isUndef(test));
+function rawClickStatNotNull(id, params, test, name) {
+    return rawClickStatTrue(id, params, !isUndef(test), name);
 }
 
-export {
-    clickStat,
-    clickStatEqual,
-    clickStatNotEqual,
-    clickStatNotNull,
-    clickStatTrue,
-};
-export default clickStat;
+export function factory(name) {
+    return {
+        clickStat: function(id, params) {
+            return rawClickStat(id, params, name);
+        },
+        clickStatEqual: function(id, params, test, value) {
+            return rawClickStatEqual(id, params, test, value, name);
+        },
+        clickStatNotEqual: function(id, params, test, value) {
+            return rawClickStatNotEqual(id, params, test, value, name);
+        },
+        clickStatNotNull: function(id, params, test) {
+            return rawClickStatNotNull(id, params, test, name);
+        },
+        clickStatTrue: function(id, params, test) {
+            return rawClickStatTrue(id, params, test, name);
+        },
+    }
+}
+
+const MtaH5 = factory('MtaH5');
+
+export const clickStat = MtaH5.clickStat;
+export const clickStatEqual = MtaH5.clickStatEqual;
+export const clickStatNotEqual = MtaH5.clickStatNotEqual;
+export const clickStatNotNull = MtaH5.clickStatNotNull;
+export const clickStatTrue = MtaH5.clickStatTrue;
