@@ -82,11 +82,11 @@ function factory(name) {
     return new Factory(name);
 }
 var MtaH5 = factory('MtaH5');
-var clickStat = MtaH5.clickStat;
-var clickStatEqual = MtaH5.clickStatEqual;
-var clickStatNotEqual = MtaH5.clickStatNotEqual;
-var clickStatNotNull = MtaH5.clickStatNotNull;
-var clickStatTrue = MtaH5.clickStatTrue;
-var use = MtaH5.use;
+var clickStat = MtaH5.clickStat.bind(MtaH5);
+var clickStatEqual = MtaH5.clickStatEqual.bind(MtaH5);
+var clickStatNotEqual = MtaH5.clickStatNotEqual.bind(MtaH5);
+var clickStatNotNull = MtaH5.clickStatNotNull.bind(MtaH5);
+var clickStatTrue = MtaH5.clickStatTrue.bind(MtaH5);
+var use = MtaH5.use.bind(MtaH5);
 
 export { factory, clickStat, clickStatEqual, clickStatNotEqual, clickStatNotNull, clickStatTrue, use };

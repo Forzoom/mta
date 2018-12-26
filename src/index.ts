@@ -93,9 +93,9 @@ export function factory(name: string): ClickStatCollection {
 
 const MtaH5 = factory('MtaH5');
 
-export const clickStat = MtaH5.clickStat;
-export const clickStatEqual = MtaH5.clickStatEqual;
-export const clickStatNotEqual = MtaH5.clickStatNotEqual;
-export const clickStatNotNull = MtaH5.clickStatNotNull;
-export const clickStatTrue = MtaH5.clickStatTrue;
-export const use = MtaH5.use;
+export const clickStat = MtaH5.clickStat.bind(MtaH5);
+export const clickStatEqual = MtaH5.clickStatEqual.bind(MtaH5);
+export const clickStatNotEqual = MtaH5.clickStatNotEqual.bind(MtaH5);
+export const clickStatNotNull = MtaH5.clickStatNotNull.bind(MtaH5);
+export const clickStatTrue = MtaH5.clickStatTrue.bind(MtaH5);
+export const use = MtaH5.use.bind(MtaH5);
