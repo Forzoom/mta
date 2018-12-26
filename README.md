@@ -50,10 +50,18 @@
 
 其中
 
-	interface ClickStatCollection {
-		clickStat(id:string, params: any): void;
-		clickStatEqual(id: string, params: any, test: any, value: any): boolean;
-		clickStatNotNull(id: string, params: any, test: any): boolean;
-		clickStatTrue(id: string, params: any, test: any): boolean;
-		clickStatNotEqual(id: string, params: any, test: any, value: any): boolean;
-	}
+```
+interface ClickStatCollection {
+	clickStat(id:string, params: any): void;
+	clickStatEqual(id: string, params: any, test: any, value: any): boolean;
+	clickStatNotNull(id: string, params: any, test: any): boolean;
+	clickStatTrue(id: string, params: any, test: any): boolean;
+	clickStatNotEqual(id: string, params: any, test: any, value: any): boolean;
+	// 添加插件
+	use(plugin: PluginFunction): void;
+}
+```
+
+#### 插件
+
+使用Factory方式生成的对象拥有use函数，通过use函数可以添加plugin，plugin将在数据上时被触发
